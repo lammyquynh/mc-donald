@@ -11,6 +11,6 @@ export const putData = async (url, data, config, token, callback) => {
 }
 
 export const postData = async (url, data, config, token, callback) => {
-    const res = await HttpService.post(url, data, config, token);
+    const res = await HttpService.post(url, data, null, token);
     callback(res);
 }

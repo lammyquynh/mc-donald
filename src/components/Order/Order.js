@@ -51,6 +51,7 @@ export default function Order(props) {
                 <Main products={products} onAdd={onAdd}></Main>
                 <Basket
                     cartItems={cartItems}
+                    setCartItems={setCartItems}
                     onAdd={onAdd}
                     onRemove={onRemove}
                 ></Basket>
