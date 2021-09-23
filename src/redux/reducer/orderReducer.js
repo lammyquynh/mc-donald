@@ -11,9 +11,16 @@ const initialState = {
 export const getOrderReducer = (state = initialState, action) => {
     switch (action.type) {
         case getActionSuccess(actions.GET_ORDER):
+            let temp = action.data?.map((element) => {
+                return {
+                    ...element,
+                    arrayFoodName: element?.foodName?.split(';')
+                }
+            }
+            );
             return {
                 ...state,
-                data: action.data,
+                data: temp,
             };
         case getActionFail(actions.GET_ORDER):
             return { ...state, data: null };

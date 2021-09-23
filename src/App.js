@@ -17,7 +17,6 @@ function App() {
         <div className="body">
           {pageVisible.title == 'Order' ?
             <Order data={data} /> : <CardList status={pageVisible.title} />}
-
         </div>
       </div>
     </Provider>

@@ -9,9 +9,8 @@ const CardItem = ({ item }) => {
         putData('order', {
             key: 1234,
             orderId: orderid,
-            status: status == 'WAITING' ? 'PROGRESSING' : 'COMPLETE'
+            status: status == 'TODO' ? 'WAITING' : status == 'WAITING' ? 'PROGRESSING' : 'COMPLETE'
         }, null, null, (data) => {
-            console.log('ataa', data);
             if (data.success = 'true')
                 getData('order', {
                     status: status.toUpperCase(),
@@ -27,15 +26,19 @@ const CardItem = ({ item }) => {
     return (
         <div className="card">
             <div className="card__body">
-                <img src={item?.status == "WAITING" ? "https://image.flaticon.com/icons/png/512/2722/2722167.png"
+                <img src={item?.status == "TODO" ? "https://thumbs.dreamstime.com/b/payment-icon-flat-style-payment-icon-flat-style-hand-holding-money-yellow-background-circle-124180489.jpg" : item?.status == "WAITING" ? "https://image.flaticon.com/icons/png/512/2722/2722167.png"
                     : item?.status == "PROGRESSING" ? "https://image.pngaaa.com/73/350073-middle.png"
                         : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoabJpUUuz5GjRXaCtlTq2u9DIK8joOyR2MA&usqp=CAU"} className="card__image"></img>
                 <h2 className="card__title">{item?.userPhone}</h2>
-                <p className="card__description">{item?.foodName}</p>
+                {item?.arrayFoodName.map((element, index) => {
+                    if (element !== ' ') {
+                        return <p key={index} className="card__description">{element}</p>
+                    }
+                })}
             </div>
             <button disabled={item?.status == "COMPLETE"} className={item?.status == "COMPLETE" ? "card__btn__enable" : "card__btn"}
                 onClick={() => handleClick(item?.orderId, item?.status)}>
-                {item?.status == "WAITING" ? "Waiting -> Progressing" :
+                {item?.status == "TODO" ? item?.total + " VNĐ" : item?.status == "WAITING" ? "Waiting -> Progressing" :
                     item?.status == "PROGRESSING" ? "Progressing -> Complete" : "Completed"}
             </button>
         </div>

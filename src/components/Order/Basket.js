@@ -12,6 +12,8 @@ export default function Basket(props) {
 
     const handleClick = () => {
 
+        console.log(cartItems);
+
         if (userPhone == null || userPhone == "") {
             alert("Vui lòng nhập số điện thoại");
             return;
@@ -22,18 +24,18 @@ export default function Basket(props) {
             userPhone: userPhone,
             storedId: "123",
             cash: true,
-            total: itemsPrice,
+            total: itemsPrice.toString(),
             status: "WAITING",
             checkout: "Y",
             address: address,
             orderDetail: cartItems.map((element) => {
                 return {
                     foodId: element.foodid,
-                    foodPrice: element.price,
-                    foodQuantity: element.qty
+                    foodPrice: element.price.toString(),
+                    foodQuantity: element.qty.toString()
                 }
             })
-        }, null, null, (data) => {
+        }, (data) => {
             if (data.success = 'true') {
                 alert("Thanh toán đơn hàng thành công!");
                 setCartItems([]);
@@ -51,7 +53,7 @@ export default function Basket(props) {
                     paddingLeft: "8px",
                     paddingTop: "6px",
                     paddingBottom: "6px",
-                }} placeholder="Nhập số điện thoại" type="text" value={userPhone} onChange={(e) => setUserPhone(e.target.value)} />
+                }} placeholder="Nhập số điện thoại" type="number" value={userPhone} onChange={(e) => setUserPhone(e.target.value)} />
             </div>
 
             <div>
@@ -81,7 +83,7 @@ export default function Basket(props) {
                         </div>
 
                         <div className="col-2 text-right">
-                            {item.qty} x ${item.price.toFixed(2)}
+                            {item.qty} x {item.price.toFixed(2)}
                         </div>
                     </div>
                 ))}
@@ -109,7 +111,7 @@ export default function Basket(props) {
                                 <strong>Total Price</strong>
                             </div>
                             <div className="col-1 text-right">
-                                <strong>${itemsPrice.toFixed(2)}</strong>
+                                <strong>{itemsPrice.toFixed(2)} VNĐ</strong>
                             </div>
                         </div>
                         <hr />
