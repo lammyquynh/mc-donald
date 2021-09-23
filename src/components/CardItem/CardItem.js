@@ -27,7 +27,9 @@ const CardItem = ({ item }) => {
     return (
         <div className="card">
             <div className="card__body">
-                <img src="https://mcdonalds.vn/uploads/2018/food/rice/MEAL_chickrice.png" className="card__image"></img>
+                <img src={item?.status == "WAITING" ? "https://image.flaticon.com/icons/png/512/2722/2722167.png"
+                    : item?.status == "PROGRESSING" ? "https://image.pngaaa.com/73/350073-middle.png"
+                        : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoabJpUUuz5GjRXaCtlTq2u9DIK8joOyR2MA&usqp=CAU"} className="card__image"></img>
                 <h2 className="card__title">{item?.userPhone}</h2>
                 <p className="card__description">{item?.foodName}</p>
             </div>

@@ -27,7 +27,7 @@ const Navbar = ({ setPageVisible }) => {
                     )
                 })}
             </ul>
-            <Button buttonSize="btn--medium">Sign Up</Button>
+            {/* <Button buttonSize="btn--medium">Sign Up</Button> */}
         </nav >
     )
 }

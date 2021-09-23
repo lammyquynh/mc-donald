@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { postData } from '../../utils/callApi';
 
 export default function Basket(props) {
@@ -7,18 +7,25 @@ export default function Basket(props) {
     const taxPrice = itemsPrice * 0.14;
     const shippingPrice = itemsPrice > 2000 ? 0 : 20;
     const totalPrice = itemsPrice + taxPrice + shippingPrice;
+    const [userPhone, setUserPhone] = useState("");
+    const [address, setAddress] = useState("");
 
     const handleClick = () => {
+
+        if (userPhone == null || userPhone == "") {
+            alert("Vui lòng nhập số điện thoại");
+            return;
+        }
         postData('order', {
             key: "1234",
             imei: "mayban",
-            userPhone: "0933330632",
+            userPhone: userPhone,
             storedId: "123",
             cash: true,
             total: itemsPrice,
             status: "WAITING",
             checkout: "Y",
-            address: "83 Hoàn Thế Thiện, Hải An, Hải Phòng",
+            address: address,
             orderDetail: cartItems.map((element) => {
                 return {
                     foodId: element.foodid,
@@ -28,14 +35,37 @@ export default function Basket(props) {
             })
         }, null, null, (data) => {
             if (data.success = 'true') {
+                alert("Thanh toán đơn hàng thành công!");
                 setCartItems([]);
+                setUserPhone("");
+                setAddress("");
             }
         })
     }
 
     return (
         <aside className="block col-1">
+            <div>
+                <input style={{
+                    width: "100%",
+                    paddingLeft: "8px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                }} placeholder="Nhập số điện thoại" type="text" value={userPhone} onChange={(e) => setUserPhone(e.target.value)} />
+            </div>
+
+            <div>
+                <input style={{
+                    width: "100%",
+                    paddingLeft: "8px",
+                    paddingTop: "6px",
+                    paddingBottom: "6px",
+                    marginTop: "10px"
+                }} placeholder="Nhập số địa chỉ" type="text" value={address} onChange={(e) => setAddress(e.target.value)} />
+
+            </div>
             <h2>Cart Items</h2>
+
             <div>
                 {cartItems.length === 0 && <div>Cart is empty</div>}
                 {cartItems.map((item) => (
