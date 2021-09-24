@@ -12,7 +12,7 @@ const Navbar = ({ setPageVisible }) => {
 
     return (
         <nav className="NavbarItems">
-            <h1 className="navbar-logo">React<i className="fab fa-react"></i></h1>
+            <h1 className="navbar-logo">Mc.Donald<i className="fab "></i></h1>
             <div className="menu-icon" onClick={handleClick}>
                 <i className={clicked ? 'fas fa-times' : 'fas fa-bars'}></i>
             </div>
